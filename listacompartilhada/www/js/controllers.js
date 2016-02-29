@@ -53,4 +53,28 @@ angular.module('starter.controllers', [])
 })
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
+})
+
+.controller('ListCtrl', function($scope, $stateParams) {
+
+    $scope.lists = [
+      {name: 'Teste', id: 1}
+    ];
+
+    $scope.addList = function(list){
+      $scope.lists.push(list);
+      console.log($scope.lists);
+    };
+
+    $scope.getLists = function(){
+      return $scope.lists;
+    };
+
+    $scope.getList = function(id){
+      return $scope.lists[id];
+    };
+
+    $scope.currentList = $scope.getList(0);
+
+  console.log($stateParams);
 });
