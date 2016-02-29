@@ -18,22 +18,10 @@
     </ion-header-bar>
     <ion-content ng-controller="ListCtrl">
       <ion-list>
-        <!-- {{getLists()}} -->
-        <ion-item ng-repeat="list in lists" href="#/app/lists/{{list.id}}">
+        {{lists}}
+        <ion-item ng-repeat="list in lists" href="#/app/list/{{list.id}}">
           {{list.name}}
         </ion-item>
-        <!-- <ion-item menu-close ng-click="login()">
-          Login
-        </ion-item>
-        <ion-item menu-close href="#/app/search">
-          Search
-        </ion-item>
-        <ion-item menu-close href="#/app/browse">
-          Browse
-        </ion-item>
-        <ion-item menu-close href="#/app/playlists">
-          Playlists
-        </ion-item> -->
         <ion-item menu-close href="#/app/newlist">
           Nova lista
         </ion-item>

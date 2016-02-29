@@ -41,20 +41,6 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('PlaylistsCtrl', function($scope) {
-  $scope.playlists = [
-    { title: 'Reggae', id: 1 },
-    { title: 'Chill', id: 2 },
-    { title: 'Dubstep', id: 3 },
-    { title: 'Indie', id: 4 },
-    { title: 'Rap', id: 5 },
-    { title: 'Cowbell', id: 6 }
-  ];
-})
-
-.controller('PlaylistCtrl', function($scope, $stateParams) {
-})
-
 .controller('ListCtrl', function($scope, $stateParams) {
 
     $scope.lists = [
@@ -75,6 +61,4 @@ angular.module('starter.controllers', [])
     };
 
     $scope.currentList = $scope.getList(0);
-
-  console.log($stateParams);
 });
