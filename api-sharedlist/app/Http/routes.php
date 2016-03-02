@@ -17,15 +17,17 @@ $app->get('/', function() use ($app) {
 
 $app->group(['prefix' => 'api/v1','namespace' => 'App\Http\Controllers'], function($app)
 {
+    #User
     $app->get('user','UserController@index');
-
     $app->get('user/{id}','UserController@getuser');
-
     $app->post('user','UserController@createUser');
-
     $app->put('user/{id}','UserController@updateUser');
-
     $app->delete('user/{id}','UserController@deleteUser');
 
+    #SharedList
     $app->get('sharedlist','SharedListController@index');
+    $app->get('sharedlist/{id}','SharedListController@getSharedList');
+    $app->post('sharedlist','SharedListController@createSharedList');
+    $app->put('sharedlist/{id}','SharedListController@updateSharedList');
+    $app->delete('sharedlist/{id}','SharedListController@deleteSharedList');
 });
