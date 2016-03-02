@@ -11,6 +11,19 @@
 |
 */
 
-$app->get('/', function () use ($app) {
-    return $app->version();
+$app->get('/', function() use ($app) {
+    return "Lumen RESTful API for SharedList app";
+});
+
+$app->group(['prefix' => 'api/v1','namespace' => 'App\Http\Controllers'], function($app)
+{
+    $app->get('user','UserController@index');
+
+    $app->get('user/{id}','UserController@getuser');
+
+    $app->post('user','UserController@createUser');
+
+    $app->put('user/{id}','UserController@updateUser');
+
+    $app->delete('user/{id}','UserController@deleteUser');
 });
