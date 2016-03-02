@@ -41,15 +41,25 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('ListCtrl', function($scope, $stateParams) {
+.controller('ListCtrl', function($scope, $stateParams, $http) {
 
-    $scope.lists = [
-      {name: 'Teste', id: 1}
-    ];
+    $scope.lists = null;
+    $scope.doRefresh = function() {
+      $http.get('http://localhost:8000/api/v1/sharedlist')
+       .success(function(newLists) {
+         $scope.lists = newLists;
+       })
+       .finally(function() {
+         // Stop the ion-refresher from spinning
+         $scope.$broadcast('scroll.refreshComplete');
+       });
+    };
+
+    $scope.doRefresh();
 
     $scope.addList = function(list){
-      $scope.lists.push(list);
-      console.log($scope.lists);
+    //  $scope.lists.push(list);
+    //  console.log($scope.lists);
     };
 
     $scope.getLists = function(){
@@ -59,6 +69,5 @@ angular.module('starter.controllers', [])
     $scope.getList = function(id){
       return $scope.lists[id];
     };
-
-    $scope.currentList = $scope.getList(0);
+    //$scope.currentList = $scope.getList(0);
 });
