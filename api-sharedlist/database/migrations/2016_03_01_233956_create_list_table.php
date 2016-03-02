@@ -12,13 +12,13 @@ class CreateListTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('list', function (Blueprint $table) {
+		Schema::create('lists', function (Blueprint $table) {
 				$table->increments('id');
 				$table->string('name');
 				$table->integer('user_id')->unsigned();
 				$table->boolean('shared');
 				$table->timestamps();
-				$table->foreign('user_id')->references('id')->on('user');
+				$table->foreign('user_id')->references('id')->on('users');
 		});
 	}
 
@@ -29,8 +29,8 @@ class CreateListTable extends Migration {
 	 */
 	public function down()
 	{
-		$table->dropForeign('list_user_id_foreign');
-		Schema::drop('list');
+		$table->dropForeign('lists_user_id_foreign');
+		Schema::drop('lists');
 	}
 
 }
