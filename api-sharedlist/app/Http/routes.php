@@ -26,4 +26,6 @@ $app->group(['prefix' => 'api/v1','namespace' => 'App\Http\Controllers'], functi
     $app->put('user/{id}','UserController@updateUser');
 
     $app->delete('user/{id}','UserController@deleteUser');
+
+    $app->get('sharedlist','SharedListController@index');
 });

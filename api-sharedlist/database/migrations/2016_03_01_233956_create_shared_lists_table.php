@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateListTable extends Migration {
+class CreateSharedListsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,7 +12,7 @@ class CreateListTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('lists', function (Blueprint $table) {
+		Schema::create('shared_lists', function (Blueprint $table) {
 				$table->increments('id');
 				$table->string('name');
 				$table->integer('user_id')->unsigned();
@@ -29,8 +29,8 @@ class CreateListTable extends Migration {
 	 */
 	public function down()
 	{
-		$table->dropForeign('lists_user_id_foreign');
-		Schema::drop('lists');
+		$table->dropForeign('sharedlists_user_id_foreign');
+		Schema::drop('sharedlists');
 	}
 
 }

@@ -16,7 +16,7 @@ class ListUserTable extends Migration {
 				$table->increments('id');
 				$table->integer('list_id')->unsigned();
 				$table->integer('user_id')->unsigned();
-				$table->foreign('list_id')->references('id')->on('lists');
+				$table->foreign('list_id')->references('id')->on('sharedlists');
 				$table->foreign('user_id')->references('id')->on('users');
 		});
 	}
@@ -28,8 +28,8 @@ class ListUserTable extends Migration {
 	 */
 	public function down()
 	{
-		$table->dropForeign('lists_user_user_id_foreign');
-		$table->dropForeign('lists_user_list_id_foreign');
+		$table->dropForeign('list_user_user_id_foreign');
+		$table->dropForeign('list_user_list_id_foreign');
 		Schema::drop('list_user');
 	}
 
