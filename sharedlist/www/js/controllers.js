@@ -1,16 +1,16 @@
 angular.module('starter.controllers', [])
 
-.controller('sharedListCtrl', function($scope, $stateParams, $http) {
+.controller('sharedListCtrl', function($scope, $stateParams, $http, sharedListAPI) {
 
     //Valores de usuário e compartilhamento fixos por enquanto
-    $scope.list = [
-      name = null,
-      user_id = 1,
-      shared = false
-    ];
+    $scope.list = {
+      name: null,
+      user_id: 1,
+      shared: false
+    };
 
     $scope.doRefresh = function() {
-      $http.get('http://localhost:8000/api/v1/sharedlist')
+      sharedListAPI.getLists()
        .success(function(newLists) {
          $scope.lists = newLists;
        })
@@ -24,7 +24,7 @@ angular.module('starter.controllers', [])
     $scope.doRefresh();
 
     $scope.addList = function(list){
-
+      sharedListAPI.saveList(list);
     };
 
     $scope.getLists = function(){
