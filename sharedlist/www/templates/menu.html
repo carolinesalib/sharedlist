@@ -23,7 +23,7 @@
       </ion-refresher>
       <ion-list>
         <ion-item ng-repeat="list in lists" href="#/app/list/{{list.id}}">
-          {{list.name}}
+          {{list.name}}<i class="icon icon-menu ion-person-stalker" ng-show="{{list.shared}}"></i>
         </ion-item>
         <ion-item menu-close href="#/app/lists">
           Listas
