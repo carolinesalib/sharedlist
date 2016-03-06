@@ -1,5 +1,7 @@
-<ion-view view-title="{{currentList.name}}" ng-controller="sharedListCtrl">
+<ion-view view-title="{{currentList.name}}" ng-controller="listCtrl">
   <ion-content>
-    <!-- <ion-checkbox dark checked="true"> Daenerys Targaryen</ion-checkbox> -->
+    <ion-checkbox ng-model="filter.blue">Red</ion-checkbox>
+    <ion-checkbox ng-model="filter.yellow">Yellow</ion-checkbox>
+    <ion-checkbox ng-model="filter.pink">Pink</ion-checkbox>
   </ion-content>
 </ion-view>
