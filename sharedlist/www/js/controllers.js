@@ -8,11 +8,15 @@ angular.module('starter.controllers', [])
       user_id: 1,
       shared: false
     };
+    $scope.currentList = null;
+    $scope.currentList = {};
+    $scope.lists = {};
 
     $scope.doRefresh = function() {
       sharedListAPI.getLists()
        .success(function(newLists) {
          $scope.lists = newLists;
+         $scope.updateCurrentList();
        })
        .finally(function() {
          // Stop the ion-refresher from spinning
@@ -23,6 +27,12 @@ angular.module('starter.controllers', [])
     //Faz requisição ao iniciar o aplicativo
     $scope.doRefresh();
 
+    $scope.updateCurrentList = function() {
+      if ($stateParams.listId) {
+         $scope.currentList = $scope.lists[$stateParams.listId];
+      }
+    }
+
     $scope.addList = function(list){
       sharedListAPI.saveList(list);
     };
@@ -31,7 +41,5 @@ angular.module('starter.controllers', [])
       return $scope.lists;
     };
 
-    $scope.getList = function(id){
-      return $scope.lists[id];
-    };
+
 });
