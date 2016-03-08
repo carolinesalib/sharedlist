@@ -1,12 +1,13 @@
 <ion-view view-title="Listas">
   <ion-content>
     <ion-refresher
-      pulling-text="Pull to refresh..."
+      pulling-text="Solte para atualizar..."
       on-refresh="doRefresh()">
     </ion-refresher>
     <ion-list>
-      <ion-item ng-repeat="list in lists" href="#/app/list/{{list.id}}">
+      <ion-item on-hold="onHold(list)" class="item item-icon-right" ng-repeat="list in lists" href="#/app/list/{{list.id}}">
         {{list.name}}
+        <i class="icon ion-person-stalker" ng-show="{{list.shared}}"></i>
       </ion-item>
     </ion-list>
   </ion-content>

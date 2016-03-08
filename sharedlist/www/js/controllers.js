@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('sharedListCtrl', function($scope, $stateParams, $http, sharedListAPI) {
+.controller('sharedListCtrl', function($scope, $stateParams, $http, sharedListAPI, $ionicPopup) {
 
     //Valores de usuário e compartilhamento fixos por enquanto
     $scope.list = {
@@ -30,6 +30,19 @@ angular.module('starter.controllers', [])
 
     $scope.getLists = function(){
       return $scope.lists;
+    };
+
+    $scope.onHold = function(list){
+      var confirmPopup = $ionicPopup.confirm({
+        title: list.name,
+        template: 'Deseja editar esta lista?'
+      });
+
+      confirmPopup.then(function(res) {
+        if(res) {
+          //redirecionar para edição
+        }
+      });
     };
 })
 

@@ -2,8 +2,11 @@
     background-color: #3B8686;
   }
 
-.icon.icon-menu {
-  position: absolute;
-  right: 0px;
-  padding-right: 15px;
+.icon.icon-list {
+  padding-left: 5px;
+}
+
+.buttons-list {
+  float:right;
+  /*padding-right: 5px;*/
 }
