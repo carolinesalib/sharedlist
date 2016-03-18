@@ -25,7 +25,24 @@ angular.module('starter.controllers', [])
     $scope.doRefresh();
 
     $scope.addList = function(list){
-      sharedListAPI.saveList(list);
+
+      if (list.name == null || list.name == "") return;
+
+      var save = sharedListAPI.saveList(list);
+
+      if (save) {
+        $ionicPopup.alert({
+          title: 'Success',
+          content: 'Adicionado com sucesso!'
+        }).then(function(res, list) {
+          delete $scope.list;
+        });
+      } else {
+        $ionicPopup.alert({
+          title: 'Error',
+          content: 'Ocorreu um problema ao salvar, você está mesmo conectado à internet?'
+        });
+      }
     };
 
     $scope.getLists = function(){
