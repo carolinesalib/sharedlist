@@ -49,6 +49,15 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         }
       }
     })
+  .state('app.editlist', {
+      url: '/editlist/:listId',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/editlist.html',
+          controller: 'sharedListCtrl'
+        }
+      }
+    })
 .state('app.single', {
     url: '/list/:listId',
     views: {

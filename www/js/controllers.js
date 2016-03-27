@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('sharedListCtrl', function($scope, $stateParams, $http, sharedListAPI, $ionicPopup) {
+.controller('sharedListCtrl', function($scope, $stateParams, $http, sharedListAPI, $ionicPopup, $location) {
 
     //Valores de usuário e compartilhamento fixos por enquanto
     $scope.list = {
@@ -45,21 +45,26 @@ angular.module('starter.controllers', [])
 
       confirmPopup.then(function(res) {
         if(res) {
-          //redirecionar para edição
+          $location.path('app/editlist/'+list.id); //.search({id: list.id});
         }
       });
     };
 })
 
+//Controller para tratar uma lista específica
 .controller('listCtrl', function($scope, $stateParams, sharedListAPI) {
 
   if ($stateParams.listId) {
-     $scope.currentList = sharedListAPI.getList($stateParams.listId)
+      sharedListAPI.getList($stateParams.listId)
       .success(function(list) {
-        $scope.currentList = list;
+        $scope.list = list;
       })
       .finally(function() {
       });
    }
+
+   $scope.updateList = function(list){
+     console.log(list);
+   };
 
 });
