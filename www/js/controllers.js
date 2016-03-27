@@ -45,14 +45,14 @@ angular.module('starter.controllers', [])
 
       confirmPopup.then(function(res) {
         if(res) {
-          $location.path('app/editlist/'+list.id); //.search({id: list.id});
+          $location.path('app/editlist/'+list.id);
         }
       });
     };
 })
 
 //Controller para tratar uma lista específica
-.controller('listCtrl', function($scope, $stateParams, sharedListAPI) {
+.controller('listCtrl', function($scope, $stateParams, sharedListAPI, $location) {
 
   if ($stateParams.listId) {
       sharedListAPI.getList($stateParams.listId)
@@ -64,7 +64,9 @@ angular.module('starter.controllers', [])
    }
 
    $scope.updateList = function(list){
-     console.log(list);
+     if (sharedListAPI.updateList(list)) {
+       $location.path('app/lists');
+     }
    };
 
 });
