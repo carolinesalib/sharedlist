@@ -1,6 +1,22 @@
+html {
+  --font-color: #D7EBEA;
+}
+
 .bar.bar-stable {
-    background-color: #3B8686;
-  }
+    background-color: #00838F;
+}
+
+.bar.bar-stable .title {
+    color: var(--font-color);
+}
+
+.bar-stable .button.button-clear {
+    color: var(--font-color);
+}
+
+.bar-stable .button:hover .button.button-clear {
+    color: var(--font-color);
+}
 
 .icon.icon-list {
   padding-left: 5px;
