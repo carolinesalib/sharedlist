@@ -1,4 +1,4 @@
-<ion-view view-title="Nova lista">
+<!-- <ion-view view-title="Nova lista">
   <ion-content>
     <form name="newListForm" ng-controller="sharedListCtrl">
       <label class="item item-input">
@@ -9,4 +9,31 @@
       </button>
     </list>
   </ion-content>
+</ion-view> -->
+<ion-view view-title="Nova lista">
+<ion-content>
+  <div class="row">
+    <form class="col s12">
+      <!-- Linha "nome" -->
+      <div class="row">
+        <div class="input-field col s12">
+          <input placeholder="Nome da lista" id="list_name" ng-model="list.name" type="text" class="validate">
+        </div>
+      </div>
+      <!-- Linha "compartilhado" -->
+      <div class="row">
+        <div class="input-field col s12">
+
+        </div>
+      </div>
+      <!-- Button adicionar -->
+      <div class="row">
+        <div class="col s6 offset-s6">
+          <a class="waves-effect waves-light btn" ng-click="addList(list);">Adicionar</a>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</ion-content>
 </ion-view>
