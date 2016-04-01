@@ -43,10 +43,28 @@ angular.module("starter").factory("sharedListAPI", function($http, $ionicPopup) 
       });
   };
 
+  var _deleteList = function (sharedList) {
+    return $http({
+      method: 'DELETE',
+      url: 'http://apisharedlist-sharedlist.rhcloud.com/sharedlist/' + sharedList.id
+    }).then(function successCallback(response) {
+        $ionicPopup.alert({
+          title: 'Success',
+          content: 'Excluído com sucesso!'
+        });
+      }, function errorCallback(response) {
+        $ionicPopup.alert({
+          title: 'Error',
+          content: 'Ocorreu um problema ao excluir, você está mesmo conectado à internet?'
+        });
+      });
+  };
+
   return {
     getLists   : _getLists,
     getList    : _getList,
     saveList   : _saveList,
-    updateList : _updateList
+    updateList : _updateList,
+    deleteList : _deleteList
   };
 });

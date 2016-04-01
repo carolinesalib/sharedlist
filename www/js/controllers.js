@@ -69,4 +69,10 @@ angular.module('starter.controllers', [])
      }
    };
 
+   $scope.deleteList = function(list){
+     if (sharedListAPI.deleteList(list)) {
+       $location.path('app/lists');
+     }
+   };
+
 });
