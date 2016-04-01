@@ -1,39 +1,26 @@
-<!-- <ion-view view-title="Nova lista">
-  <ion-content>
-    <form name="newListForm" ng-controller="sharedListCtrl">
-      <label class="item item-input">
-        <input type="text" placeholder="Nome da lista" ng-model="list.name"/>
-      </label>
-      <button class="button button-block button-positive" ng-click="addList(list);">
-        Adicionar
-      </button>
-    </list>
-  </ion-content>
-</ion-view> -->
 <ion-view view-title="Nova lista">
 <ion-content>
   <div class="row">
     <form class="col s12">
       <!-- Linha "nome" -->
-      <div class="row">
-        <div class="input-field col s12">
-          <input placeholder="Nome da lista" id="list_name" ng-model="list.name" type="text" class="validate">
-        </div>
+      <div class="input-field col s12">
+        <input placeholder="Nome da lista" id="list_name" ng-model="list.name" type="text" class="validate">
       </div>
       <!-- Linha "compartilhado" -->
+      <div class="input-field col s12">
+        <p>
+          <input type="checkbox" id="list_shared" ng-model="list.shared"/>
+          <label for="list_shared">Lista compartilhada?</label>
+        </p>
+      </div>    
       <div class="row">
-        <div class="input-field col s12">
-
+        <div class="input-field col s6">
         </div>
-      </div>
-      <!-- Button adicionar -->
-      <div class="row">
-        <div class="col s6 offset-s6">
+        <div class="input-field col s6">
           <a class="waves-effect waves-light btn" ng-click="addList(list);">Adicionar</a>
         </div>
       </div>
     </form>
   </div>
-
 </ion-content>
 </ion-view>

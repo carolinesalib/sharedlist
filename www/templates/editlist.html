@@ -1,21 +1,35 @@
-<ion-view view-title="Nova lista">
-  <ion-content>
-    <form name="editListForm" ng-controller="listCtrl">
-      <label class="item item-input">
-        <input type="text" placeholder="Nome da lista" ng-model="list.name"/>
-      </label>
-      <div class="item item-toggle">
-         Lista compartilhada?
-         <label class="toggle toggle-positive">
-           <input type="checkbox" ng-model="list.shared">
-           <div class="track">
-             <div class="handle"></div>
-           </div>
-         </label>
+<ion-view view-title="Edição">
+<ion-content>
+  <div class="row">
+    <form class="col s12" ng-controller="listCtrl">
+      <!-- Linha "nome" -->
+        <div class="input-field col s12">
+          <input placeholder="Nome da lista" id="list_name" ng-model="list.name" type="text" class="validate">
+        </div>
+      <!-- Linha "compartilhado" -->
+      <div class="input-field col s12">
+        <p>
+          <input type="checkbox" id="list_shared" ng-model="list.shared"/>
+          <label for="list_shared">Lista compartilhada?</label>
+        </p>
       </div>
-      <button class="button button-block button-positive" ng-click="updateList(list);">
-        Atualizar
-      </button>
-    </list>
-  </ion-content>
+      <!-- Exemplo de como deverá ficar a lista de usuários -->
+      <div class="input-field col s12">
+        <div class="collection">
+          <a class="collection-item">teste@gmail.com</a>
+          <a class="collection-item">teste@gmail.com</a>
+          <a class="collection-item">teste@gmail.com</a>
+        </div>
+      </div>
+      <!-- Button adicionar -->
+      <div class="row">
+        <div class="input-field col s6">
+        </div>
+        <div class="input-field col s6">
+          <a class="waves-effect waves-light btn" ng-click="updateList(list);">Salvar</a>
+        </div>
+      </div>
+    </form>
+  </div>
+</ion-content>
 </ion-view>
