@@ -60,11 +60,18 @@ angular.module("starter").factory("sharedListAPI", function($http, $ionicPopup) 
       });
   };
 
+  var _getItens = function (sharedlist) {
+    return $http.get("http://apisharedlist-sharedlist.rhcloud.com/item?list_id="+sharedlist.id);
+  };
+
   return {
+    //Sharedlists
     getLists   : _getLists,
     getList    : _getList,
     saveList   : _saveList,
     updateList : _updateList,
-    deleteList : _deleteList
+    deleteList : _deleteList,
+    //Itens
+    getItens   : _getItens
   };
 });

@@ -58,6 +58,7 @@ angular.module('starter.controllers', [])
       sharedListAPI.getList($stateParams.listId)
       .success(function(list) {
         $scope.list = list;
+        $scope.getItens(list);
       })
       .finally(function() {
       });
@@ -73,6 +74,15 @@ angular.module('starter.controllers', [])
      if (sharedListAPI.deleteList(list)) {
        $location.path('app/lists');
      }
+   };
+
+   $scope.getItens = function(sharedlist) {
+       sharedListAPI.getItens(sharedlist)
+       .success(function(itens) {
+         $scope.itens = itens;
+       })
+       .finally(function() {
+       });
    };
 
 });
