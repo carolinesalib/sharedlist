@@ -61,7 +61,7 @@ angular.module("starter").factory("sharedListAPI", function($http, $ionicPopup) 
   };
 
   var _getItens = function (sharedlist) {
-    return $http.get("http://apisharedlist-sharedlist.rhcloud.com/item?list_id="+sharedlist.id);
+    return $http.get("http://apisharedlist-sharedlist.rhcloud.com/item/"+sharedlist.id);
   };
 
   return {

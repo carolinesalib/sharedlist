@@ -3,10 +3,12 @@
     <div class="item item-divider">
       {{list.name}}
     </div>
-
     <ion-list>
       <ion-item on-hold="" class="item item-icon-right" ng-repeat="item in itens">
-        <ion-checkbox ng-model="item.name">{{item.name}}</ion-checkbox>
+          <p>
+            <input type="checkbox" id="list_shared" ng-model="item.checked"/>
+            <label for="list_shared">{{item.name}}</label>
+          </p>
       </ion-item>
     </ion-list>
   </ion-content>
