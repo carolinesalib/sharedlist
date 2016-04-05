@@ -58,6 +58,15 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         }
       }
     })
+  .state('app.newitem', {
+      url: '/newitem',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/newitem.html',
+          controller: 'sharedListCtrl'
+        }
+      }
+    })
 .state('app.single', {
     url: '/list/:listId',
     views: {
