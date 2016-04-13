@@ -1,0 +1,21 @@
+<ion-view view-title="Edição" ng-controller="listCtrl">
+<ion-content>
+  <div class="item item-divider">
+    {{list.name}}
+  </div>
+  <div class="row">
+    <form class="col s12">
+      <!-- Linha "nome" -->
+        <div class="input-field col s12">
+          <input placeholder="Nome do item" id="list_name" ng-model="item.name" type="text" class="validate">
+        </div>
+      <!-- Button adicionar -->
+        <div class="input-field col s6">
+        </div>
+        <div class="input-field col s6">
+          <a class="waves-effect waves-light btn" ng-click="addItem(item);">Salvar</a>
+        </div>
+    </form>
+  </div>
+</ion-content>
+</ion-view>

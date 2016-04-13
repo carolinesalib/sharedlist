@@ -59,7 +59,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       }
     })
   .state('app.newitem', {
-      url: '/newitem',
+      url: '/newitem/:listId',
       views: {
         'menuContent': {
           templateUrl: 'templates/newitem.html',
@@ -67,7 +67,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         }
       }
     })
-.state('app.single', {
+.state('app.list', {
     url: '/list/:listId',
     views: {
       'menuContent': {

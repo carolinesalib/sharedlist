@@ -54,7 +54,14 @@ angular.module('starter.controllers', [])
 //Controller para tratar uma lista específica
 .controller('listCtrl', function($scope, $stateParams, sharedListAPI, $location) {
 
-  if ($stateParams.listId) {
+    $scope.item = {
+      name: null,
+      user_id: 1,
+      shared: false,
+      list_id: $stateParams.listId
+    };
+
+   if ($stateParams.listId) {
       sharedListAPI.getList($stateParams.listId)
       .success(function(list) {
         $scope.list = list;
@@ -85,4 +92,15 @@ angular.module('starter.controllers', [])
        });
    };
 
+   $scope.addItem = function(item) {
+
+     if (item.name == null || item.name == "") return;
+
+     console.log(item);
+     console.log($scope.list)
+     // 
+    //  if (sharedListAPI.saveItem(item)) {
+    //    delete $scope.item;
+    //  }
+   };
 });
