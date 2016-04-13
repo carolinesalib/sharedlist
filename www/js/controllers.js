@@ -96,11 +96,9 @@ angular.module('starter.controllers', [])
 
      if (item.name == null || item.name == "") return;
 
-     console.log(item);
-     console.log($scope.list)
-
      if (sharedListAPI.saveItem(item)) {
-       delete $scope.item;
+         $location.path('app/list/'+item.list_id);
+         delete $scope.item;
      }
    };
 });
