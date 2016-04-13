@@ -64,6 +64,24 @@ angular.module("starter").factory("sharedListAPI", function($http, $ionicPopup) 
     return $http.get("http://apisharedlist-sharedlist.rhcloud.com/item/"+sharedlist.id);
   };
 
+  var _saveItem = function (item) {
+    return $http({
+      method: 'POST',
+      data: item,
+      url: 'http://apisharedlist-sharedlist.rhcloud.com/item'
+    }).then(function successCallback(response) {
+        $ionicPopup.alert({
+          title: 'Success',
+          content: 'Adicionado com sucesso!'
+        });
+      }, function errorCallback(response) {
+        $ionicPopup.alert({
+          title: 'Error',
+          content: 'Ocorreu um problema ao salvar, você está mesmo conectado à internet?'
+        });
+      });
+  };
+
   return {
     //Sharedlists
     getLists   : _getLists,
@@ -72,6 +90,7 @@ angular.module("starter").factory("sharedListAPI", function($http, $ionicPopup) 
     updateList : _updateList,
     deleteList : _deleteList,
     //Itens
-    getItens   : _getItens
+    getItens   : _getItens,
+    saveItem   : _saveItem
   };
 });

@@ -57,7 +57,7 @@ angular.module('starter.controllers', [])
     $scope.item = {
       name: null,
       user_id: 1,
-      shared: false,
+      checked: false,
       list_id: $stateParams.listId
     };
 
@@ -98,9 +98,9 @@ angular.module('starter.controllers', [])
 
      console.log(item);
      console.log($scope.list)
-     // 
-    //  if (sharedListAPI.saveItem(item)) {
-    //    delete $scope.item;
-    //  }
+
+     if (sharedListAPI.saveItem(item)) {
+       delete $scope.item;
+     }
    };
 });
