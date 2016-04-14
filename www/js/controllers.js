@@ -28,9 +28,19 @@ angular.module('starter.controllers', [])
 
       if (list.name == null || list.name == "") return;
 
-      if (sharedListAPI.saveList(list)) {
-        delete $scope.list;
-      }
+      sharedListAPI.saveList(list).then(function successCallback(response) {
+          $ionicPopup.alert({
+            title: 'Success',
+            content: 'Adicionado com sucesso!'
+          });
+        }, function errorCallback(response) {
+          $ionicPopup.alert({
+            title: 'Error',
+            content: 'Ocorreu um problema ao salvar, você está mesmo conectado à internet?'
+          });
+        });
+
+        // delete $scope.list;
     };
 
     $scope.getLists = function(){
@@ -52,7 +62,7 @@ angular.module('starter.controllers', [])
 })
 
 //Controller para tratar uma lista específica
-.controller('listCtrl', function($scope, $stateParams, sharedListAPI, $location) {
+.controller('listCtrl', function($scope, $stateParams, sharedListAPI, $location, $ionicPopup) {
 
     $scope.item = {
       name: null,
@@ -72,15 +82,33 @@ angular.module('starter.controllers', [])
    }
 
    $scope.updateList = function(list){
-     if (sharedListAPI.updateList(list)) {
-       $location.path('app/lists');
-     }
+     sharedListAPI.updateList(list).then(function successCallback(response) {
+         $ionicPopup.alert({
+           title: 'Success',
+           content: 'Atualizado com sucesso!'
+         });
+         $location.path('app/lists');
+       }, function errorCallback(response) {
+         $ionicPopup.alert({
+           title: 'Error',
+           content: 'Ocorreu um problema ao salvar, você está mesmo conectado à internet?'
+         });
+       });
    };
 
    $scope.deleteList = function(list){
-     if (sharedListAPI.deleteList(list)) {
-       $location.path('app/lists');
-     }
+     sharedListAPI.deleteList(list).then(function successCallback(response) {
+         $ionicPopup.alert({
+           title: 'Success',
+           content: 'Excluído com sucesso!'
+         });
+         $location.path('app/lists');
+       }, function errorCallback(response) {
+         $ionicPopup.alert({
+           title: 'Error',
+           content: 'Ocorreu um problema ao excluir, você está mesmo conectado à internet?'
+         });
+       });
    };
 
    $scope.getItens = function(sharedlist) {
@@ -96,9 +124,18 @@ angular.module('starter.controllers', [])
 
      if (item.name == null || item.name == "") return;
 
-     if (sharedListAPI.saveItem(item)) {
-         $location.path('app/list/'+item.list_id);
-         delete $scope.item;
-     }
+     sharedListAPI.saveItem(item).then(function successCallback(response) {
+         $ionicPopup.alert({
+           title: 'Success',
+           content: 'Adicionado com sucesso!'
+         });
+          $location.path('app/list/'+item.list_id);
+          delete $scope.item;
+       }, function errorCallback(response) {
+         $ionicPopup.alert({
+           title: 'Error',
+           content: 'Ocorreu um problema ao salvar, você está mesmo conectado à internet?'
+         });
+       });
    };
 });
