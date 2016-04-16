@@ -64,12 +64,8 @@ angular.module('starter')
      if (item.name == null || item.name == "") return;
 
      sharedListAPI.saveItem(item).then(function successCallback(response) {
-         $ionicPopup.alert({
-           title: 'Success',
-           content: 'Adicionado com sucesso!'
-         });
-          $location.path('app/list/'+item.list_id);
           delete $scope.item;
+          $location.path('app/list/'+item.list_id);
        }, function errorCallback(response) {
          $ionicPopup.alert({
            title: 'Error',
