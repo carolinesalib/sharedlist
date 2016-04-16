@@ -1,17 +1,18 @@
 angular.module("starter").factory("sharedListAPI", function($http) {
+  var urlApi = "http://apisharedlist-sharedlist.rhcloud.com/";
   var _getLists = function () {
-    return $http.get("http://apisharedlist-sharedlist.rhcloud.com/sharedlist");
+    return $http.get(urlApi+"sharedlist");
   };
 
   var _getList = function (idList) {
-    return $http.get("http://apisharedlist-sharedlist.rhcloud.com/sharedlist/"+idList);
+    return $http.get(urlApi+"sharedlist/"+idList);
   };
 
   var _saveList = function (sharedList) {
     return $http({
       method: 'POST',
       data: sharedList,
-      url: 'http://apisharedlist-sharedlist.rhcloud.com/sharedlist'
+      url: urlApi+"sharedlist"
     });
   };
 
@@ -19,26 +20,26 @@ angular.module("starter").factory("sharedListAPI", function($http) {
     return $http({
       method: 'PUT',
       data: sharedList,
-      url: 'http://apisharedlist-sharedlist.rhcloud.com/sharedlist/' + sharedList.id
+      url: urlApi+"sharedlist/" + sharedList.id
     });
   };
 
   var _deleteList = function (sharedList) {
     return $http({
       method: 'DELETE',
-      url: 'http://apisharedlist-sharedlist.rhcloud.com/sharedlist/' + sharedList.id
+      url: urlApi+"sharedlist/" + sharedList.id
     });
   };
 
   var _getItens = function (sharedlist) {
-    return $http.get("http://apisharedlist-sharedlist.rhcloud.com/item/"+sharedlist.id);
+    return $http.get(urlApi+"item/"+sharedlist.id);
   };
 
   var _saveItem = function (item) {
     return $http({
       method: 'POST',
       data: item,
-      url: 'http://apisharedlist-sharedlist.rhcloud.com/item'
+      url: urlApi+"item"
     });
   };
 
