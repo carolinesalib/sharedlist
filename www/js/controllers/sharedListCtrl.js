@@ -29,18 +29,14 @@ angular.module('starter')
       if (list.name == null || list.name == "") return;
 
       sharedListAPI.saveList(list).then(function successCallback(response) {
-          $ionicPopup.alert({
-            title: 'Success',
-            content: 'Adicionado com sucesso!'
-          });
+          $location.path('app/lists');
+          delete $scope.list
         }, function errorCallback(response) {
           $ionicPopup.alert({
             title: 'Error',
             content: 'Ocorreu um problema ao salvar, você está mesmo conectado à internet?'
           });
         });
-
-        // delete $scope.list;
     };
 
     $scope.getLists = function(){
