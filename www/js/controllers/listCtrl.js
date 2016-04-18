@@ -22,11 +22,7 @@ angular.module('starter')
 
    $scope.updateList = function(list){
      sharedListAPI.updateList(list).then(function successCallback(response) {
-         $ionicPopup.alert({
-           title: 'Success',
-           content: 'Atualizado com sucesso!'
-         });
-         $location.path('app/lists');
+         $location.path('app/list/'+list.id);
        }, function errorCallback(response) {
          $ionicPopup.alert({
            title: 'Error',
