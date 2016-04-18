@@ -42,17 +42,4 @@ angular.module('starter')
     $scope.getLists = function(){
       return $scope.lists;
     };
-
-    $scope.onHold = function(list){
-      var confirmPopup = $ionicPopup.confirm({
-        title: list.name,
-        template: 'Deseja editar esta lista?'
-      });
-
-      confirmPopup.then(function(res) {
-        if(res) {
-          $location.path('app/editlist/'+list.id);
-        }
-      });
-    };
 });
