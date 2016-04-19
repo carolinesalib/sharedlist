@@ -8,6 +8,10 @@ angular.module('starter')
       user_id: 1,
       shared: false
     };
+    $scope.pendingList = {
+      type: null,
+      list: null
+    };
     $scope.lists = {};
 
     $scope.doRefresh = function() {
@@ -35,13 +39,13 @@ angular.module('starter')
       if (list.name == null || list.name == "") return;
 
       sharedListAPI.saveList(list).then(function successCallback(response) {
-          StorageService.addList(list);
-          $location.path('app/lists');
         }, function errorCallback(response) {
-          $ionicPopup.alert({
-            title: 'Error',
-            content: 'Ocorreu um problema ao salvar, você está mesmo conectado à internet?'
-          });
+          $scope.pendingList.list = list;
+          $scope.pendingList.type = "POST";
+          StorageService.addPendingRequest($scope.pendingList);
         });
+
+        StorageService.addList(list);
+        $location.path('app/lists');
     };
 });
