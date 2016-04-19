@@ -28,8 +28,7 @@ angular.module('starter', ['ionic', 'ngStorage'])
   .state('app', {
     url: '/app',
     abstract: true,
-    templateUrl: 'templates/menu.html',
-    controller: 'sharedListCtrl'
+    templateUrl: 'templates/menu.html'
   })
   .state('app.lists', {
       url: '/lists',

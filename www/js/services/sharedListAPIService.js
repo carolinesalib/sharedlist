@@ -1,10 +1,12 @@
 angular.module("starter").factory("sharedListAPI", function($http) {
   var urlApi = "http://apisharedlist-sharedlist.rhcloud.com/";
   var _getLists = function () {
+    console.log("Requisição: _getLists");
     return $http.get(urlApi+"sharedlist");
   };
 
   var _getList = function (idList) {
+    console.log("Requisição: _getList");
     return $http.get(urlApi+"sharedlist/"+idList);
   };
 
@@ -32,6 +34,7 @@ angular.module("starter").factory("sharedListAPI", function($http) {
   };
 
   var _getItens = function (sharedlist) {
+    console.log("Requisição: _getItens");
     return $http.get(urlApi+"item/"+sharedlist.id);
   };
 

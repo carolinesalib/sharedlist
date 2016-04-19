@@ -11,14 +11,20 @@ angular.module('starter')
     $scope.lists = {};
 
     $scope.doRefresh = function() {
-      sharedListAPI.getLists()
-       .success(function(newLists) {
-         $scope.lists = newLists;
-       })
-       .finally(function() {
-         // Stop the ion-refresher from spinning
-         $scope.$broadcast('scroll.refreshComplete');
-       });
+      var storageLists = StorageService.getAllLists();
+      if (storageLists) {
+        $scope.lists = storageLists;
+        $scope.$broadcast('scroll.refreshComplete');
+        return;
+      } else {
+        sharedListAPI.getLists()
+         .success(function(newLists) {
+           StorageService.addLists(newLists);
+           $scope.lists = newLists;
+         });
+       }
+       // Stop the ion-refresher from spinning
+       $scope.$broadcast('scroll.refreshComplete');
     };
 
     //Faz requisição ao iniciar o aplicativo
@@ -29,17 +35,13 @@ angular.module('starter')
       if (list.name == null || list.name == "") return;
 
       sharedListAPI.saveList(list).then(function successCallback(response) {
+          StorageService.addList(list);
           $location.path('app/lists');
-          delete $scope.list
         }, function errorCallback(response) {
           $ionicPopup.alert({
             title: 'Error',
             content: 'Ocorreu um problema ao salvar, você está mesmo conectado à internet?'
           });
         });
-    };
-
-    $scope.getLists = function(){
-      return $scope.lists;
     };
 });
