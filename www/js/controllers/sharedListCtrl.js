@@ -1,6 +1,6 @@
 angular.module('starter')
 
-.controller('sharedListCtrl', function($scope, $stateParams, $http, sharedListAPI, $ionicPopup, $location) {
+.controller('sharedListCtrl', function($scope, $stateParams, $http, sharedListAPI, $ionicPopup, $location, StorageService) {
 
     //Valores de usuário e compartilhamento fixos por enquanto
     $scope.list = {
@@ -41,5 +41,5 @@ angular.module('starter')
 
     $scope.getLists = function(){
       return $scope.lists;
-    };  
+    };
 });
