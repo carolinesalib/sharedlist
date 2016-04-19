@@ -54,7 +54,7 @@ angular.module("starter").factory("sharedListAPI", function($http) {
   var _deleteItem = function (item) {
     return $http({
       method: 'DELETE',
-      url: urlApi+"item/" + item.id
+      url: urlApi+"item/"+item.id
     });
   };
 

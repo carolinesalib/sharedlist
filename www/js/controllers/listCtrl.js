@@ -71,7 +71,6 @@ angular.module('starter')
      };
 
      $scope.updateItem = function(item) {
-       console.log(item);
        sharedListAPI.updateItem(item).then(function successCallback(response) {
 
          }, function errorCallback(response) {
@@ -80,5 +79,25 @@ angular.module('starter')
              content: 'Ocorreu um problema ao salvar, você está mesmo conectado à internet?'
            });
          });
+     };
+
+    $scope.onHold = function(item){
+       var confirmPopup = $ionicPopup.confirm({
+         title: item.name,
+         template: 'Deseja excluir este item?'
+       });
+
+       confirmPopup.then(function(res) {
+         if(!res) return;
+
+         sharedListAPI.deleteItem(item).then(function successCallback(response) {
+            $scope.getItens($scope.list);
+           }, function errorCallback(response) {
+             $ionicPopup.alert({
+               title: 'Error',
+               content: 'Ocorreu um problema ao excluir, você está mesmo conectado à internet?'
+             });
+           });
+       });
      };
 });
