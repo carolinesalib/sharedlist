@@ -1,13 +1,21 @@
 angular.module('starter')
 
 //Controller para tratar uma lista específica
-.controller('listCtrl', function($scope, $stateParams, sharedListAPI, $location, $ionicPopup) {
+.controller('listCtrl', function($scope, $stateParams, sharedListAPI, $location, $ionicPopup, StorageService) {
 
     $scope.item = {
       name: null,
       user_id: 1,
       checked: false,
       list_id: $stateParams.listId
+    };
+    $scope.pendingList = {
+      type: null,
+      list: null
+    };
+    $scope.pendingItem = {
+      type: null,
+      item: null
     };
 
    if ($stateParams.listId) {
@@ -22,13 +30,12 @@ angular.module('starter')
 
    $scope.updateList = function(list){
      sharedListAPI.updateList(list).then(function successCallback(response) {
-         $location.path('app/list/'+list.id);
        }, function errorCallback(response) {
-         $ionicPopup.alert({
-           title: 'Error',
-           content: 'Ocorreu um problema ao salvar, você está mesmo conectado à internet?'
-         });
+         $scope.pendingList.list = list;
+         $scope.pendingList.type = "PUT";
        });
+       StorageService.updateList(list);
+       $location.path('app/list/'+list.id);
    };
 
    $scope.deleteList = function(list){

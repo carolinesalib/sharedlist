@@ -8,8 +8,12 @@ angular.module("starter").factory ('StorageService', function ($localStorage) {
   var _addList = function (lists) {
     $localStorage.lists.push(lists);
   }
-  var _removeLists = function (lists) {
+  var _removeList = function (lists) {
     $localStorage.lists.splice($localStorage.lists.indexOf(lists), 1);
+  }
+  var _updateList = function (list) {
+    _removeList(list);
+    _addList(list);
   }
   var _addPendingRequest = function (request) {
     $localStorage.pendingRequest.push(request);
@@ -22,7 +26,8 @@ angular.module("starter").factory ('StorageService', function ($localStorage) {
     getAllLists : _getAllLists,
     addLists    : _addLists,
     addList     : _addList,
-    removeLists : _removeLists,
+    removeList  : _removeList,
+    updateList  : _updateList,
     addPendingRequest    : _addPendingRequest,
     removePendingRequest : _removePendingRequest
   };
