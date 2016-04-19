@@ -43,6 +43,21 @@ angular.module("starter").factory("sharedListAPI", function($http) {
     });
   };
 
+  var _updateItem = function (item) {
+    return $http({
+      method: 'PUT',
+      data: item,
+      url: urlApi+"item/"+item.id
+    });
+  };
+
+  var _deleteItem = function (item) {
+    return $http({
+      method: 'DELETE',
+      url: urlApi+"item/" + item.id
+    });
+  };
+
   return {
     //Sharedlists
     getLists   : _getLists,
@@ -52,6 +67,8 @@ angular.module("starter").factory("sharedListAPI", function($http) {
     deleteList : _deleteList,
     //Itens
     getItens   : _getItens,
-    saveItem   : _saveItem
+    saveItem   : _saveItem,
+    updateItem : _updateItem,
+    deleteItem : _deleteItem
   };
 });

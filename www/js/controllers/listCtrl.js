@@ -68,5 +68,17 @@ angular.module('starter')
            content: 'Ocorreu um problema ao salvar, você está mesmo conectado à internet?'
          });
        });
-   };
+     };
+
+     $scope.updateItem = function(item) {
+       console.log(item);
+       sharedListAPI.updateItem(item).then(function successCallback(response) {
+
+         }, function errorCallback(response) {
+           $ionicPopup.alert({
+             title: 'Error',
+             content: 'Ocorreu um problema ao salvar, você está mesmo conectado à internet?'
+           });
+         });
+     };
 });

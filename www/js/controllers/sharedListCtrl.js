@@ -41,5 +41,5 @@ angular.module('starter')
 
     $scope.getLists = function(){
       return $scope.lists;
-    };
+    };  
 });

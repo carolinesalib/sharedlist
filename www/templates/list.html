@@ -10,7 +10,7 @@
     <ion-list>
       <ion-item on-hold="" class="item item-icon-right" ng-repeat="item in itens">
           <p>
-            <input type="checkbox" id="list_shared" ng-model="item.checked"/>
+            <input type="checkbox" id="list_shared" ng-model="item.checked" ng-click="updateItem(item)"/>
             <label for="list_shared">{{item.name}}</label>
           </p>
       </ion-item>
