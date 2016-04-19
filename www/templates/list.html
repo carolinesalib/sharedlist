@@ -1,12 +1,9 @@
-<ion-view cache-view="false" ng-controller="listCtrl">
+<ion-view cache-view="false" view-title="{{list.name}}" ng-controller="listCtrl">
   <ion-nav-buttons side="primary">
       <a href="#/app/editlist/{{list.id}}" class="button button-clear button-positive">Editar</a>
   </ion-nav-buttons>
 
   <ion-content>
-    <div class="item item-divider">
-      {{list.name}}
-    </div>
     <ion-list>
       <ion-item on-hold="" class="item item-icon-right" ng-repeat="item in itens">
           <p>
