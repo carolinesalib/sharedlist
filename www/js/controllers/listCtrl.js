@@ -33,6 +33,7 @@ angular.module('starter')
        }, function errorCallback(response) {
          $scope.pendingList.list = list;
          $scope.pendingList.type = "PUT";
+         StorageService.addPendingRequest($scope.pendingList);
        });
        StorageService.updateList(list);
        $location.path('app/list/'+list.id);
@@ -40,17 +41,13 @@ angular.module('starter')
 
    $scope.deleteList = function(list){
      sharedListAPI.deleteList(list).then(function successCallback(response) {
-         $ionicPopup.alert({
-           title: 'Success',
-           content: 'Excluído com sucesso!'
-         });
-         $location.path('app/lists');
        }, function errorCallback(response) {
-         $ionicPopup.alert({
-           title: 'Error',
-           content: 'Ocorreu um problema ao excluir, você está mesmo conectado à internet?'
-         });
+         $scope.pendingList.list = list;
+         $scope.pendingList.type = "DELETE";
+         StorageService.addPendingRequest($scope.pendingList);
        });
+       StorageService.removeList(list);
+      $location.path('app/lists');
    };
 
    $scope.getItens = function(sharedlist) {
