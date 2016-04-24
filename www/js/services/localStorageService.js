@@ -21,7 +21,24 @@ angular.module("starter").factory ('StorageService', function ($localStorage) {
   var _removePendingRequest = function (request) {
     $localStorage.pendingRequest.splice($localStorage.pendingRequest.indexOf(request), 1);
   }
+  var _getAllItens = function (listId) {
+    var itens = _.where($localStorage.itens, {list_id: listId});
 
+    if (_.isEmpty(itens)){
+        return null;
+    }
+    return itens;
+  };
+  var _addItens = function (itens) {
+    $localStorage.itens = _.union($localStorage.itens, itens);
+  }
+  var _removeItens = function (itens) {
+    $localStorage.itens.splice($localStorage.itens.indexOf(itens), 1);
+  }
+  var _updateItens = function (itens) {
+    _removeItens(itens);
+    _addItens(itens);
+  }
   return {
     getAllLists : _getAllLists,
     addLists    : _addLists,
@@ -29,6 +46,10 @@ angular.module("starter").factory ('StorageService', function ($localStorage) {
     removeList  : _removeList,
     updateList  : _updateList,
     addPendingRequest    : _addPendingRequest,
-    removePendingRequest : _removePendingRequest
+    removePendingRequest : _removePendingRequest,
+    getAllItens  : _getAllItens,
+    addItens     : _addItens,
+    removeItens  : _removeItens,
+    updateItens  : _updateItens,
   };
 });

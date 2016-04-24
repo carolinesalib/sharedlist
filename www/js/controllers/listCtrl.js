@@ -51,12 +51,31 @@ angular.module('starter')
    };
 
    $scope.getItens = function(sharedlist) {
+
+     var storageItens = StorageService.getAllItens(sharedlist.id);
+
+     if (storageItens) {
+         $scope.itens = storageItens;
+     } else {
        sharedListAPI.getItens(sharedlist)
-       .success(function(itens) {
-         $scope.itens = itens;
-       })
-       .finally(function() {
-       });
+        .success(function(itens){
+          $scope.itens = itens;
+          StorageService.addItens(itens);
+        });
+     }
+    //  var storageItens = StorageService.getAllItens(sharedlist.id);
+    //  if (storageItens) {
+    //    $scope.itens = storageItens;
+    //    return;
+    //  } else {
+    //    sharedListAPI.getItens(sharedlist)
+    //    .success(function(itens) {
+    //      $scope.itens = itens;
+    //      StorageService.addItens(itens);
+    //    })
+    //    .finally(function() {
+    //    });
+    //  }
    };
 
    $scope.addItem = function(item) {
