@@ -51,7 +51,6 @@ angular.module('starter')
    };
 
    $scope.getItens = function(sharedlist) {
-
      var storageItens = StorageService.getAllItens(sharedlist.id);
 
      if (storageItens) {
@@ -63,19 +62,6 @@ angular.module('starter')
           StorageService.addItens(itens);
         });
      }
-    //  var storageItens = StorageService.getAllItens(sharedlist.id);
-    //  if (storageItens) {
-    //    $scope.itens = storageItens;
-    //    return;
-    //  } else {
-    //    sharedListAPI.getItens(sharedlist)
-    //    .success(function(itens) {
-    //      $scope.itens = itens;
-    //      StorageService.addItens(itens);
-    //    })
-    //    .finally(function() {
-    //    });
-    //  }
    };
 
    $scope.addItem = function(item) {
@@ -83,14 +69,14 @@ angular.module('starter')
      if (item.name == null || item.name == "") return;
 
      sharedListAPI.saveItem(item).then(function successCallback(response) {
-          delete $scope.item;
-          $location.path('app/list/'+item.list_id);
        }, function errorCallback(response) {
-         $ionicPopup.alert({
-           title: 'Error',
-           content: 'Ocorreu um problema ao salvar, você está mesmo conectado à internet?'
-         });
+         $scope.pendingItem.item = item;
+         $scope.pendingItem.type = "POST";
+         StorageService.addPendingRequest($scope.pendingItem);
        });
+
+       StorageService.addItens(item);
+       $location.path('app/list/'+item.list_id);
      };
 
      $scope.updateItem = function(item) {

@@ -22,7 +22,7 @@ angular.module("starter").factory ('StorageService', function ($localStorage) {
     $localStorage.pendingRequest.splice($localStorage.pendingRequest.indexOf(request), 1);
   }
   var _getAllItens = function (listId) {
-    var itens = _.where($localStorage.itens, {list_id: listId});
+    var itens = _.filter($localStorage.itens, function(num){ return num.list_id == listId; });
 
     if (_.isEmpty(itens)){
         return null;
@@ -30,7 +30,12 @@ angular.module("starter").factory ('StorageService', function ($localStorage) {
     return itens;
   };
   var _addItens = function (itens) {
-    $localStorage.itens = _.union($localStorage.itens, itens);
+
+    if (_.isArray(itens)) {
+      $localStorage.itens = _.union($localStorage.itens, itens);
+    } else {
+      $localStorage.itens.push(itens);
+    }
   }
   var _removeItens = function (itens) {
     $localStorage.itens.splice($localStorage.itens.indexOf(itens), 1);
