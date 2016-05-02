@@ -39,13 +39,12 @@ angular.module('starter')
       if (list.name == null || list.name == "") return;
 
       sharedListAPI.saveList(list).then(function successCallback(response) {
+          StorageService.addList(response.data);
+          $location.path('app/lists');
         }, function errorCallback(response) {
           $scope.pendingList.list = list;
           $scope.pendingList.type = "POST";
           StorageService.addPendingRequest($scope.pendingList);
         });
-
-        StorageService.addList(list);
-        $location.path('app/lists');
     };
 });
