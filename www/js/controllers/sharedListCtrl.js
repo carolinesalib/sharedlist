@@ -1,6 +1,6 @@
 angular.module('starter')
 
-.controller('sharedListCtrl', function($scope, $stateParams, $http, sharedListAPI, $ionicPopup, $location, StorageService) {
+.controller('sharedListCtrl', function($scope, $stateParams, $http, sharedListAPI, $ionicPopup, $location, PouchDBService) {
 
     //Valores de usuário e compartilhamento fixos por enquanto
     $scope.list = {
@@ -8,27 +8,18 @@ angular.module('starter')
       user_id: 1,
       shared: false
     };
-    $scope.pendingList = {
-      type: null,
-      list: null
-    };
     $scope.lists = {};
 
     $scope.doRefresh = function() {
-      var storageLists = StorageService.getAllLists();
-      if (storageLists) {
-        $scope.lists = storageLists;
-        $scope.$broadcast('scroll.refreshComplete');
-        return;
-      } else {
-        sharedListAPI.getLists()
-         .success(function(newLists) {
-           StorageService.addLists(newLists);
-           $scope.lists = newLists;
-         });
-       }
-       // Stop the ion-refresher from spinning
-       $scope.$broadcast('scroll.refreshComplete');
+        PouchDBService.replicate();
+        PouchDBService.db.allDocs({
+          include_docs: true,
+          attachments: true
+        }).then(function (result) {
+          $scope.lists = result.rows;
+        }).catch(function (err) {
+          console.log(err);
+        });
     };
 
     //Faz requisição ao iniciar o aplicativo
@@ -38,13 +29,13 @@ angular.module('starter')
 
       if (list.name == null || list.name == "") return;
 
-      sharedListAPI.saveList(list).then(function successCallback(response) {
-          StorageService.addList(response.data);
-          $location.path('app/lists');
-        }, function errorCallback(response) {
-          $scope.pendingList.list = list;
-          $scope.pendingList.type = "POST";
-          StorageService.addPendingRequest($scope.pendingList);
-        });
+        // var _localDB = new PouchDB('sharedlist');
+        //
+        // _localDB.post(list).then(function (response) {
+        //     $location.path('app/lists');
+        //     _localDB.sync(_remoteDB);
+        // }).catch(function (err) {
+        //   console.log(err);
+        // });
     };
 });
