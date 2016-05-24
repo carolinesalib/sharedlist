@@ -1,6 +1,6 @@
-angular.module("starter").factory ('PouchDBService', function () {
+angular.module("starter").factory ('PouchDBService',  ['urlRemoteCouchdbServer', function (urlRemoteCouchdbServer) {
   var _db = new PouchDB('sharedlist'),
-    // remote = 'http://url_remote_couchdb', 
+    remote = urlRemoteCouchdbServer,
     opts = {
       continuous: true
     };
@@ -10,12 +10,8 @@ angular.module("starter").factory ('PouchDBService', function () {
       _db.replicate.from(remote, opts);
     }
 
-    function _getAllDocs() {
-
-    }
-
     return {
       db : _db,
       replicate  : _replicate
     };
-});
+}]);
