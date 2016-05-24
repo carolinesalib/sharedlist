@@ -1,54 +1,46 @@
 angular.module('starter')
 
 //Controller para tratar uma lista específica
-.controller('listCtrl', function($scope, $stateParams, sharedListAPI, $location, $ionicPopup, StorageService) {
+.controller('listCtrl', function($scope, $stateParams, sharedListAPI, $location, $ionicPopup, PouchDBService) {
 
     $scope.item = {
-      _id: 'item',
       name: null,
       user_id: 1,
       checked: false,
       list_id: $stateParams.listId
     };
-  //   $scope.pendingList = {
-  //     type: null,
-  //     list: null
-  //   };
-  //   $scope.pendingItem = {
-  //     type: null,
-  //     item: null
-  //   };
-   //
-  //  if ($stateParams.listId) {
-  //     sharedListAPI.getList($stateParams.listId)
-  //     .success(function(list) {
-  //       $scope.list = list;
-  //       $scope.getItens(list);
-  //     })
-  //     .finally(function() {
-  //     });
-  //  }
+
+   if ($stateParams.listId) {
+     PouchDBService.db.get($stateParams.listId).then(function(doc) {
+         $scope.list = doc;
+       }).catch(function (err) {
+         console.log(err);
+       });
+   }
 
    $scope.updateList = function(list){
-    //  sharedListAPI.updateList(list).then(function successCallback(response) {
-    //    }, function errorCallback(response) {
-    //      $scope.pendingList.list = list;
-    //      $scope.pendingList.type = "PUT";
-    //      StorageService.addPendingRequest($scope.pendingList);
-    //    });
-    //    StorageService.updateList(list);
-    //    $location.path('app/list/'+list.id);
+     PouchDBService.db.get($stateParams.listId).then(function(doc) {
+        return PouchDBService.db.put({
+           _id: doc._id,
+           _rev: doc._rev,
+           name: list.name,
+           shared: list.shared
+         });
+       }).then(function(response) {
+         $location.path('app/list/'+list._id);
+       }).catch(function (err) {
+         console.log(err);
+       });
    };
 
    $scope.deleteList = function(list){
-    //  sharedListAPI.deleteList(list).then(function successCallback(response) {
-    //    }, function errorCallback(response) {
-    //      $scope.pendingList.list = list;
-    //      $scope.pendingList.type = "DELETE";
-    //      StorageService.addPendingRequest($scope.pendingList);
-    //    });
-    //    StorageService.removeList(list);
-    //   $location.path('app/lists');
+     PouchDBService.db.get($stateParams.listId).then(function(doc) {
+        return PouchDBService.db.remove(doc);
+       }).then(function(response) {
+         $location.path('app/lists');
+       }).catch(function (err) {
+         console.log(err);
+       });
    };
 
    $scope.getItens = function(sharedlist) {
