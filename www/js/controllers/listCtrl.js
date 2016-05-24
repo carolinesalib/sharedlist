@@ -1,7 +1,7 @@
 angular.module('starter')
 
 //Controller para tratar uma lista específica
-.controller('listCtrl', function($scope, $stateParams, sharedListAPI, $location, $ionicPopup, PouchDBService) {
+.controller('listCtrl', function($scope, $stateParams, sharedListAPI, $location, $ionicPopup, PouchDBService, $ionicPlatform) {
 
     $scope.item = {
       name: null,
@@ -10,13 +10,15 @@ angular.module('starter')
       list_id: $stateParams.listId
     };
 
-   if ($stateParams.listId) {
-     PouchDBService.db.get($stateParams.listId).then(function(doc) {
-         $scope.list = doc;
-       }).catch(function (err) {
-         console.log(err);
-       });
-   }
+    $ionicPlatform.ready(function() {
+      if ($stateParams.listId) {
+         PouchDBService.db.get($stateParams.listId).then(function(doc) {
+           $scope.list = doc;
+         }).catch(function (err) {
+           console.log(err);
+         });
+      }
+    });
 
    $scope.updateList = function(list){
      PouchDBService.db.get($stateParams.listId).then(function(doc) {

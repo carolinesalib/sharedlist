@@ -1,6 +1,6 @@
 angular.module('starter')
 
-.controller('sharedListCtrl', function($scope, $stateParams, $http, sharedListAPI, $ionicPopup, $location, PouchDBService) {
+.controller('sharedListCtrl', function($scope, $stateParams, $http, sharedListAPI, $ionicPopup, $location, PouchDBService, $ionicPlatform) {
 
     //Valores de usuário e compartilhamento fixos por enquanto
     $scope.list = {
@@ -24,8 +24,10 @@ angular.module('starter')
       $scope.$broadcast('scroll.refreshComplete');
     };
 
-    //Faz requisição ao iniciar o aplicativo
-    $scope.doRefresh();
+    $ionicPlatform.ready(function() {
+      //Faz requisição ao iniciar o aplicativo
+      $scope.doRefresh();
+    });
 
     $scope.addList = function(list){
 
