@@ -11,15 +11,17 @@ angular.module('starter')
     $scope.lists = {};
 
     $scope.doRefresh = function() {
-        PouchDBService.replicate();
-        PouchDBService.db.allDocs({
-          include_docs: true,
-          attachments: true
-        }).then(function (result) {
-          $scope.lists = result.rows;
-        }).catch(function (err) {
-          console.log(err);
-        });
+      PouchDBService.replicate();
+      PouchDBService.db.allDocs({
+        include_docs: true,
+        attachments: true
+      }).then(function (result) {
+        $scope.lists = result.rows;
+      }).catch(function (err) {
+        console.log(err);
+      });
+      // Stop the ion-refresher from spinning
+      $scope.$broadcast('scroll.refreshComplete');
     };
 
     //Faz requisição ao iniciar o aplicativo
