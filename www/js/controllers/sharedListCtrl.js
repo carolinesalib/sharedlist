@@ -28,14 +28,10 @@ angular.module('starter')
     $scope.addList = function(list){
 
       if (list.name == null || list.name == "") return;
-
-        // var _localDB = new PouchDB('sharedlist');
-        //
-        // _localDB.post(list).then(function (response) {
-        //     $location.path('app/lists');
-        //     _localDB.sync(_remoteDB);
-        // }).catch(function (err) {
-        //   console.log(err);
-        // });
+        PouchDBService.db.post(list).then(function (response) {
+            $location.path('app/lists');
+        }).catch(function (err) {
+          console.log(err);
+        });
     };
 });
